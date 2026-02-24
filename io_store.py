@@ -103,23 +103,17 @@ def save_groups(groups_path: str, groups: dict[str, list[str]]) -> None:
         lines.append(f"[{gname}]")
         for t in groups[gname]:
             lines.append(t)
-        lines.append("")  # пустая строка между группами
+        lines.append("")
     with open(groups_path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines).rstrip() + "\n")
 
 def parse_caption_tokens(text: str) -> list[str]:
-    """
-    Парсит caption в список токенов.
-    Поддержка:
-      - разделители: запятая, перенос строки
-      - лишние пробелы
-    """
+
     text = text.strip()
     if not text:
         return []
     parts = re.split(r",|\n", text)
     tokens = [normalize_trigger(p) for p in parts if p.strip()]
-    # уникализируем, сохраняя порядок
     seen = set()
     out = []
     for t in tokens:

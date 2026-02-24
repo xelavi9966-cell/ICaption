@@ -48,12 +48,10 @@ class ScrollableFrame(ttk.Frame):
         else:
             if self.scrollbar.winfo_ismapped():
                 self.scrollbar.pack_forget()
-            # сброс позиции, чтобы не было “пролистывания в пустоту”
             self.canvas.yview_moveto(0)
 
     def _bind_mousewheel(self, widget):
         def on_mousewheel(event):
-            # прокручиваем только если есть что прокручивать
             bbox = self.canvas.bbox("all")
             if not bbox:
                 return

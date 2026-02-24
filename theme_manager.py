@@ -15,14 +15,13 @@ class ThemeManager:
         self.root = root
         self.style = ttk.Style(root)
         self.assets_dir = assets_dir
-        self._image_refs = {}  # чтобы PhotoImage не удалялись GC
+        self._image_refs = {}
 
     def available(self):
         return THEMES
 
     def apply(self, name: str):
         name = name.strip()
-        # сброс ссылок на изображения при смене темы
         self._image_refs = {}
 
         if name == "Light":
@@ -40,7 +39,6 @@ class ThemeManager:
             except Exception:
                 pass
 
-        # обновление
         self.root.update_idletasks()
 
         if hasattr(self.root, "on_theme_applied"):

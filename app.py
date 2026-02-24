@@ -26,7 +26,7 @@ class App(tk.Tk):
         self.title(APP_TITLE)
         self.geometry("1100x700")
 
-        # ===== UI STATE (ОБЯЗАТЕЛЬНО ДО _build_ui) =====
+        # ===== UI STATE =====
         self.current_group = tk.StringVar(value="All")
         self.group_title = tk.StringVar(value="Group: All")
         self.filter_var = tk.StringVar(value="")
@@ -298,7 +298,7 @@ class App(tk.Tk):
         tr_entry.grid(row=1, column=1, sticky="ew", padx=(8, 0), pady=(10, 0))
 
         ttk.Label(frm, text="Move to group:").grid(row=2, column=0, sticky="w", pady=(10, 0))
-        # editable combobox: можно выбрать существующую или вписать новую
+
         grp_var = tk.StringVar(value="")
         grp_cb = ttk.Combobox(frm, textvariable=grp_var, state="normal", values=self._group_values()[1:], style="ICap.TCombobox")
         grp_cb.grid(row=2, column=1, sticky="ew", padx=(8, 0), pady=(10, 0))
@@ -670,7 +670,7 @@ class App(tk.Tk):
         )
 
     def _apply_combobox_theme(self, theme_name: str):
-        """Настраивает ttk.Combobox и его выпадающий список (popdown listbox) под тему."""
+    
         if theme_name == "Dark":
             cb_bg = "#202020"
             cb_fg = "#e6e6e6"
@@ -705,7 +705,7 @@ class App(tk.Tk):
 
 
     def _apply_listbox_theme(self, lb: tk.Listbox, theme_name: str):
-        """Красит tk.Listbox под тему."""
+
         if theme_name == "Dark":
             bg = "#202020"
             fg = "#e6e6e6"
@@ -1302,7 +1302,7 @@ class App(tk.Tk):
                 heading_bg = "#202020"
                 heading_fg = "#e6e6e6"
             else:
-                # Light и Image
+                # Light and Image
                 tv_bg = "#ffffff"
                 tv_fg = "#111111"
                 tv_sel_bg = "#d9d9d9"
@@ -1342,7 +1342,7 @@ class App(tk.Tk):
         #try:
             style = ttk.Style(self)
 
-            # 1️⃣ СБРОС map полностью
+           
             style.map("TButton", background=[], foreground=[])
 
             if name == "Dark":
@@ -1358,10 +1358,10 @@ class App(tk.Tk):
                 btn_pressed_bg = "#d9d9d9"
                 btn_active_fg = "#111111"
 
-            # 2️⃣ Базовая конфигурация
+           
             style.configure("TButton", background=btn_bg, foreground=btn_fg)
 
-            # 3️⃣ Задаём map заново
+            
             style.map(
                 "TButton",
                 background=[
@@ -1423,11 +1423,11 @@ class App(tk.Tk):
             if self._hotkeys_allowed():
                 self.clean()
 
-        # стрелки можно оставить глобальными (обычно в полях ввода они тоже не нужны)
+
         self.bind_all("<Left>", hk_prev)
         self.bind_all("<Right>", hk_next)
 
-        # буквенные — через проверку фокуса
+
         self.bind_all("a", hk_prev)
         self.bind_all("d", hk_next)
         self.bind_all("s", hk_save)
@@ -1486,7 +1486,7 @@ class App(tk.Tk):
         except Exception:
             pass
 
-        # Сканируем в фоне
+      
         t = threading.Thread(target=self._scan_folder_worker, args=(folder,), daemon=True)
         t.start()
 
